@@ -1,32 +1,15 @@
 # sass-variables
 
-## Expect the following output during the dev server build process
+## This is to demonstrate that adjusting the slider height on tabs is not possible
 
+[Per this issue](https://github.com/vuetifyjs/vuetify/issues/7683) the dev team has informed us that to adjust the
+slider tab height, we should use the available sass variable `$tabs-slider-height` to set the height. Yet the rendered
+HTML for this component is something like this:
 ```
- ERROR  Failed to compile with 1 errors12:37:09 PM     
+<div class="v-tabs-slider-wrapper" style="height: 2px; left: 885px; width: 214px;">
+   <div class="v-tabs-slider primary"></div>
+</div>
+```
 
-
- error  in ./src/components/HelloWorld.vue?vue&type=style&index=0&lang=scss&
-
-Module build failed (from ./node_modules/sass-loader/lib/loader.js):
-
-  color: #6bb91a;
- ^
-      Expected ";".
-    ╷
-147 │ a {
-    │   ^
-    ╵
-  stdin 147:3  root stylesheet
-      in /sass-variables/src/components/HelloWorld.vue (line 147, column 3)
-
- @ ./node_modules/vue-style-loader??ref--8-oneOf-1-0!./node_modules/css-loader??ref--8-oneOf-1-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--8-oneOf-1-2!./node_modules/sass-loader/lib/loader.js??ref--8-oneOf-1-3!./node_modules/vuetify-loader/lib/loader.js!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/HelloWorld.vue?vue&type=style&index=0&lang=scss& 4:14-488 14:3-18:5 15:22-496
- @ ./src/components/HelloWorld.vue?vue&type=style&index=0&lang=scss&
- @ ./src/components/HelloWorld.vue
- @ ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/vuetify-loader/lib/loader.js!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/Home.vue?vue&type=script&lang=js&
- @ ./src/views/Home.vue?vue&type=script&lang=js&
- @ ./src/views/Home.vue
- @ ./src/router.js
- @ ./src/main.js
- @ multi (webpack)-dev-server/client?http://192.168.1.85:8081/sockjs-node (webpack)/hot/dev-server.js ./src/main.js
- ```
+Because the div with the `v-tabs-slider` class is wrapped by a parent div that has a height of 2px applied
+via the style property, the slider height gets clipped and this effort becomes ineffective.

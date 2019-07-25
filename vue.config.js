@@ -12,9 +12,9 @@ module.exports = {
     // https://vuetifyjs.com/en/customization/sass-variables#single-file-components
     const e = ["vue-modules","vue","normal-modules","normal"];
     e.forEach((match) => {
-      config.module.rule('sass').oneOf(match).use('sass-loader')
+      config.module.rule('scss').oneOf(match).use('sass-loader')
       // .tap(opt => Object.assign(opt, { data: `@import '~@/sass/main.sass'` })) // <-- THIS does not work but it's what written in the docs.
-        .tap(opt => Object.assign(opt, { data: `@import '~@/sass/main.scss'` })) // <-- This does not work either.
+        .tap(opt => Object.assign(opt, { data: `@import '~@/sass/main.scss';` })) // <-- This does not work either.
     });
   },
   css: {
